@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | The Order of the White Cat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #faf9f6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            text-align: center;
+            background: white;
+            border-radius: 32px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .cat-icon { font-size: 80px; margin-bottom: 20px; animation: bounce 0.8s ease; }
+        @keyframes bounce {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-15px); }
+        }
+        h1 { color: #1a1a1a; margin-bottom: 16px; font-size: 28px; }
+        p { color: #555; line-height: 1.6; margin-bottom: 16px; }
+        .btn-home {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 12px 24px;
+            background: #d46b5e;
+            color: white;
+            text-decoration: none;
+            border-radius: 40px;
+        }
+        hr { margin: 24px 0; border: none; border-top: 1px solid #e8e5df; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cat-icon">🐱🙏✨</div>
+        <h1>Thank You for Your Support!</h1>
+        <p>Your donation has been received by the White Cat Oracle.</p>
+        
+        <hr>
+        
+        <p>📧 <strong>Your report will be sent to your email within 5-10 minutes.</strong></p>
+        <p style="font-size: 14px; color: #666;">Please check your spam folder if you don't see it.</p>
+        
+        <a href="/" class="btn-home">✨ Return Home ✨</a>
+    </div>
+</body>
+</html>
