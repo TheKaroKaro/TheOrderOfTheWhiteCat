@@ -3,57 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | The Order of the White Cat</title>
+    <title>Transmission Logged | Order of the White Cat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #faf9f6;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 500px;
-            text-align: center;
-            background: white;
-            border-radius: 32px;
-            padding: 50px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        .cat-icon { font-size: 80px; margin-bottom: 20px; animation: bounce 0.8s ease; }
-        @keyframes bounce {
-            0%,100%{ transform: translateY(0); }
-            50%{ transform: translateY(-15px); }
-        }
-        h1 { color: #1a1a1a; margin-bottom: 16px; font-size: 28px; }
-        p { color: #555; line-height: 1.6; margin-bottom: 16px; }
-        .btn-home {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 12px 24px;
-            background: #d46b5e;
-            color: white;
-            text-decoration: none;
-            border-radius: 40px;
-        }
-        hr { margin: 24px 0; border: none; border-top: 1px solid #e8e5df; }
+        body { background: #0a0a12; color: #f5f5fa; font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .success-card { max-width: 520px; width: 100%; text-align: center; background: #121222; border: 1px solid #2a2a48; border-radius: 28px; padding: 56px; }
+        .icon-pulse { font-size: 72px; margin-bottom: 24px; animation: glow 2s infinite ease-in-out; }
+        @keyframes glow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(0,0,0,0)); } 50% { transform: scale(1.03); filter: drop-shadow(0 0 15px rgba(223,183,108,0.2)); } }
+        h1 { font-family: 'Cinzel', serif; font-size: 26px; color: #dfb76c; margin-bottom: 16px; font-weight: 400; }
+        p { color: #a0a0ba; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .session-badge { background: #1a1a30; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-family: monospace; color: #dfb76c; display: inline-block; border: 1px solid #2a2a48; margin-bottom: 24px; }
+        .btn-return { display: inline-block; padding: 14px 32px; background: #dfb76c; color: #0a0a12; text-decoration: none; border-radius: 25px; font-weight: 600; font-family: 'Cinzel', serif; font-size: 13px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="cat-icon">🐱🙏✨</div>
-        <h1>Thank You for Your Support!</h1>
-        <p>Your donation has been received by the White Cat Oracle.</p>
-        
-        <hr>
-        
-        <p>📧 <strong>Your report will be sent to your email within 5-10 minutes.</strong></p>
-        <p style="font-size: 14px; color: #666;">Please check your spam folder if you don't see it.</p>
-        
-        <a href="/" class="btn-home">✨ Return Home ✨</a>
+    <div class="success-card">
+        <div class="icon-pulse">🐱🔮✨</div>
+        <h1>Transmission Verified</h1>
+        <p>Your matrix configuration parameters have successfully loaded. The high computational system engines are formatting your extensive multi-page dossier blueprint now.</p>
+        <p>📧 Your final structural document portfolio will automatically dispatch and land inside your declared electronic mailbox address within <strong>3-7 minutes</strong>.</p>
+        <div class="session-badge" id="sessionDisplay">Dossier Tracking Key Identification: Tracking Vector State Init...</div>
+        <br><br>
+        <a href="/" class="btn-return">↩ Return to Homepage Matrix</a>
     </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const URLParamMap = new URLSearchParams(window.location.search);
+            const keyId = URLParamMap.get('session');
+            if(keyId) document.getElementById('sessionDisplay').innerText = `Dossier Key Tracking Node: ${keyId}`;
+            localStorage.removeItem('active_matrix_payload');
+        });
+    </script>
 </body>
 </html>

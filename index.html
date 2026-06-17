@@ -3,247 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Order of the White Cat | Mystical Readings</title>
+    <title>The Order of the White Cat | Spiritual Altar Matrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-deep: #0a0a12;
+            --bg-surface: #121222;
+            --bg-input: #1a1a30;
+            --accent-gold: #dfb76c;
+            --accent-gold-hover: #f3cf8c;
+            --text-primary: #f5f5fa;
+            --text-secondary: #a0a0ba;
+            --border-color: #2a2a48;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-deep); color: var(--text-primary); font-family: 'Inter', sans-serif; line-height: 1.6; padding-bottom: 60px; }
+        .nav-header { display: flex; justify-content: center; padding: 32px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border-color); }
+        .logo { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 600; letter-spacing: 2px; }
+        .logo span { color: var(--accent-gold); }
+        .main-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         
-        body {
-            background: #faf9f6;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', serif;
-            color: #1a1a1a;
-            line-height: 1.5;
-        }
+        .hero-section { text-align: center; margin-bottom: 50px; }
+        .hero-section h1 { font-family: 'Cinzel', serif; font-size: 38px; margin-bottom: 16px; color: var(--text-primary); }
+        .hero-section p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 14px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 50px; }
+        .service-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .service-card:hover, .service-card.active { border-color: var(--accent-gold); transform: translateY(-2px); }
+        .service-card.active::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent-gold); border-radius: 20px 20px 0 0; }
+        .service-icon { font-size: 32px; margin-bottom: 12px; }
+        .service-card h3 { font-family: 'Cinzel', serif; font-size: 15px; margin-bottom: 8px; }
+        .service-card p { color: var(--text-secondary); font-size: 12px; margin-bottom: 16px; min-height: 54px; }
+        .tier-badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold); }
+
+        .engine-container { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 28px; padding: 44px; max-width: 750px; margin: 0 auto; display: none; }
+        .form-title { font-family: 'Cinzel', serif; font-size: 22px; text-align: center; margin-bottom: 32px; color: var(--accent-gold); }
+        .form-section-header { color: var(--accent-gold); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 24px; margin-bottom: 16px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 12px; margin-bottom: 8px; color: var(--text-secondary); }
+        input, select, textarea { width: 100%; padding: 14px 16px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-primary); font-family: inherit; font-size: 14px; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-gold); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .btn-submit { width: 100%; padding: 16px; background: var(--accent-gold); color: var(--bg-deep); border: none; border-radius: 30px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Cinzel', serif; transition: background 0.2s; }
+        .btn-submit:hover { background: var(--accent-gold-hover); }
+
+        /* Altar Elements (Previews & Donations) */
+        .preview-frame { margin-top: 32px; background: var(--bg-deep); border: 1px dashed var(--border-color); border-radius: 18px; padding: 32px; display: none; }
+        .preview-insight-box { background: var(--bg-surface); padding: 20px; border-radius: 12px; margin-bottom: 24px; border-left: 3px solid var(--accent-gold); }
+        .locked-badge-container { background: rgba(30, 20, 20, 0.4); padding: 16px; border-radius: 10px; border: 1px dashed #4a2a2a; margin-top: 14px; }
+        .locked-title { color: #f27474; font-size: 13px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+
+        .altar-donation-box { background: var(--bg-surface); border: 1px solid var(--border-color); padding: 32px; border-radius: 20px; margin-top: 24px; text-align: center; }
+        .altar-donation-box h4 { font-family: 'Cinzel', serif; color: var(--accent-gold); margin-bottom: 8px; font-size: 18px; }
+        .altar-donation-box p { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
         
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-        
-        .logo span {
-            color: #d46b5e;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: #1a1a1a;
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: #d46b5e;
-        }
-        
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero h1 {
-            font-size: 56px;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-        
-        .hero h1 span {
-            color: #d46b5e;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 32px;
-        }
-        
-        .cat-illustration {
-            text-align: center;
-            font-size: 120px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-right: 16px;
-        }
-        
-        .btn-primary {
-            background: #d46b5e;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #b85c50;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            border: 2px solid #d46b5e;
-            color: #d46b5e;
-            background: transparent;
-        }
-        
-        .btn-secondary:hover {
-            background: #d46b5e;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .features {
-            background: white;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        
-        .features h2 {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-        
-        .features-subtitle {
-            color: #666;
-            margin-bottom: 48px;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background: #faf9f6;
-            padding: 30px;
-            border-radius: 20px;
-            transition: transform 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-        
-        .feature-card p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-            font-size: 14px;
-        }
-        
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav {
-                flex-direction: column;
-                gap: 16px;
-            }
-            .hero h1 {
-                font-size: 36px;
-            }
-        }
+        .region-selector-block { background: var(--bg-input); padding: 16px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+        .donation-slider-wrapper { background: var(--bg-input); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid var(--border-color); }
+
+        /* Post-Donation Email Capture Terminal */
+        .email-capture-terminal { display: none; background: #121230; border: 2px solid var(--accent-gold); border-radius: 24px; padding: 36px; margin-top: 32px; text-align: center; }
+        .email-capture-terminal h3 { font-family: 'Cinzel', serif; color: var(--accent-gold); margin-bottom: 8px; }
+
+        #paypal-button-container { max-width: 320px; margin: 0 auto; }
+        .midtrans-btn { background: #00c4ff; color: #0a0a12; border: none; padding: 14px 32px; border-radius: 25px; font-weight: 700; cursor: pointer; font-family: 'Cinzel', serif; width: 100%; max-width: 320px; transition: opacity 0.2s; }
+
+        @media (max-width: 992px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 576px) { .services-grid { grid-template-columns: 1fr; } .engine-container { padding: 24px; } }
     </style>
 </head>
 <body>
-    <nav class="nav">
+
+    <header class="nav-header">
         <div class="logo">The Order of the <span>White Cat</span></div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/reading.html">Reading</a>
-            <a href="/couple.html">Couple</a>
-        </div>
-    </nav>
-    
-    <div class="hero">
-        <div>
-            <h1>Discover what the <span>stars</span> have planned for you</h1>
-            <p>Ancient Chinese metaphysics meets modern wisdom. Get personalized readings about your love life, career path, and destiny.</p>
-            <a href="/reading.html" class="btn btn-primary">✨ Get Your Free Preview</a>
-            <a href="/couple.html" class="btn btn-secondary">💑 Couple Reading</a>
-        </div>
-        <div class="cat-illustration">
-            🐱🔮✨
-        </div>
-    </div>
-    
-    <div class="features">
-        <h2>What awaits in your reading</h2>
-        <div class="features-subtitle">Ancient wisdom, personalized for you</div>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📜</div>
-                <h3>BaZi Reading</h3>
-                <p>Your Four Pillars of Destiny revealed</p>
+    </header>
+
+    <main class="main-container">
+        <section class="hero-section">
+            <h1>The Sacred Altar Matrix</h1>
+            <p>Input your spatial vectors to manifest an immediate foundational preview snapshot. Opt to extend a sanctuary donation to initiate high-compute full-length lifecycle portfolios.</p>
+        </section>
+
+        <!-- Services Grid Layer -->
+        <section class="services-grid">
+            <div class="service-card" id="card-tarot" onclick="selectService('tarot')">
+                <div class="service-icon">🃏</div>
+                <h3>Tarot Array</h3>
+                <p>Localized energetic blockages and immediate focal crossroad variations.</p>
+                <div class="tier-badge">Foundational Offering</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">💖</div>
-                <h3>Love & Compatibility</h3>
-                <p>Find your perfect match</p>
+            <div class="service-card" id="card-numerology" onclick="selectService('numerology')">
+                <div class="service-icon">🔢</div>
+                <h3>Identity Numerology</h3>
+                <p>Deconstructs mechanical blueprint traits from your unchangeable name index.</p>
+                <div class="tier-badge">Intermediate Offering</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">💼</div>
-                <h3>Career Path</h3>
-                <p>Discover your natural talents</p>
+            <div class="service-card" id="card-bazi" onclick="selectService('bazi')">
+                <div class="service-icon">📜</div>
+                <h3>Four Pillars (BaZi)</h3>
+                <p>Deep cosmic alignment analysis tracking optimal industry fits and wealth timelines.</p>
+                <div class="tier-badge">High-Tier Offering</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <h3>2026 Forecast</h3>
-                <p>Your luck calendar for the year</p>
+            <div class="service-card" id="card-couple" onclick="selectService('couple')">
+                <div class="service-icon">💞</div>
+                <h3>Affinity Resonance</h3>
+                <p>Dual-coordinate compatibility analysis. Compares two path structures side-by-side.</p>
+                <div class="tier-badge" style="color: #f27474;">Paid Sanctuary Altar</div>
             </div>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>🐾 One donation. Full report. No subscriptions. 🐾</p>
-        <p style="margin-top: 16px;">© 2026 The Order of the White Cat. For entertainment purposes.</p>
-    </div>
+        </section>
+
+        <!-- Core Mechanics Engine Container Box -->
+        <section class="engine-container" id="engineContainer">
+            <h2 class="form-title" id="engineTitle">Configuring Matrix Link</h2>
+            <form id="oracleDataForm">
+                
+                <!-- Coordinate Profile A Block -->
+                <div id="primaryIdentitySection">
+                    <div class="form-section-header" id="primaryHeader">Your Coordinate Profile</div>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Full Declared Legal Name *</label><input type="text" id="targetName" required placeholder="Name Vector"></div>
+                        <div class="form-group"><label>Solar Birth Date *</label><input type="date" id="birthDate" required></div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Form Injection Target Slot -->
+                <div id="dynamicFormFields"></div>
+
+                <div class="form-group">
+                    <label>Formulate Your Central Path Query / Intention Focus</label>
+                    <textarea id="userQuestion" rows="3" placeholder="Describe what industry parameters or decisions you seek alignment for..."></textarea>
+                </div>
+
+                <button type="button" class="btn-submit" id="mainActionButton" onclick="processEnginePreview()">🔮 Materialize Matrix Preview</button>
+            </form>
+
+            <!-- Interactive Preview & Altar Window Layout Frame -->
+            <div class="preview-frame" id="previewFrame">
+                <div class="preview-insight-box" id="previewInsight"></div>
+                <div id="lockedPreviewTeasers"></div>
+
+                <!-- Sanctuary Donation Controller Panel Interface -->
+                <div class="altar-donation-box" id="altarDonationBox">
+                    <h4>Donate to the White Cat Sanctuary</h4>
+                    <p>Support our cosmic infrastructure to compile and route your high-compute, multi-page deep dossier directly to you.</p>
+                    
+                    <!-- Region Selector Relocated Directly To Payment Experience -->
+                    <div class="region-selector-block">
+                        <label>Select Your Earthly Region Gateway</label>
+                        <select id="regionSelector" onchange="handleRegionSwitch()">
+                            <option value="global">🌐 Global Sanctuary Network (PayPal / USD)</option>
+                            <option value="sea">🌏 Southeast Asia Local Network (Midtrans / IDR-QRIS)</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-slider-wrapper">
+                        <label>Determine Sanctuary Contribution Weight</label>
+                        <div class="grid-2" style="align-items: center; margin-top:8px;">
+                            <input type="range" id="priceSlider" oninput="syncSliderCalculation()">
+                            <input type="text" id="priceDisplayInput" readonly style="font-weight:700; color:var(--accent-gold); text-align:center; background:transparent; border:none; font-size:18px;">
+                        </div>
+                    </div>
+
+                    <div id="payment-gateway-wrapper">
+                        <div id="paypal-button-container"></div>
+                        <div id="midtrans-container" style="display: none;">
+                            <button class="midtrans-btn" onclick="executeMidtransDonation()">💳 Dispatch Donation via Midtrans</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POST-DONATION ELECTRONIC ROUTING TERMINAL SCREEN -->
+            <div class="email-capture-terminal" id="emailCaptureTerminal">
+                <h3>✨ Sanctuary Contribution Confirmed</h3>
+                <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">Your transaction matrix has been logged successfully into our logs. Enter your destination electronic mailbox address to route your personalized reading file.</p>
+                <div class="form-group" style="max-width:450px; margin: 0 auto 20px auto;">
+                    <input type="email" id="destinationEmail" placeholder="oracle@yourdomain.com" style="text-align:center; border-color:var(--accent-gold);">
+                </div>
+                <button type="button" class="btn-submit" style="max-width:320px; margin:0 auto;" onclick="dispatchFinalReportToPipeline()">🔒 Transmit Full Cosmic Ledger</button>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SET_YOUR_MIDTRANS_CLIENT_KEY"></script>
+
+    <script>
+        let selectedGatewayRegion = 'global';
+        let activeProductCode = '';
+        let currentUnifiedNumericValue = 0;
+
+        const dynamicSanctuaryPricing = {
+            tarot: { usdMin: 2.00, idrMin: 32000, title: "Tarot Spread Array Blueprint" },
+            numerology: { usdMin: 4.00, idrMin: 64000, title: "Identity Numerology Configuration" },
+            bazi: { usdMin: 7.00, idrMin: 112000, title: "Four Pillars (BaZi) Lifetime Dossier" },
+            couple: { usdMin: 9.00, idrMin: 145000, title: "Affinity Relationship Matrix" }
+        };
+
+        function selectService(type) {
+            activeProductCode = type;
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active'));
+            document.getElementById(`card-${type}`).classList.add('active');
+            document.getElementById('engineContainer').style.display = 'block';
+            document.getElementById('engineTitle').innerText = dynamicSanctuaryPricing[type].title;
+            document.getElementById('previewFrame').style.display = 'none';
+            document.getElementById('emailCaptureTerminal').style.display = 'none';
+            document.getElementById('oracleDataForm').style.display = 'block';
+
+            const dynamicFields = document.getElementById('dynamicFormFields');
+            const primaryHeader = document.getElementById('primaryHeader');
+            const mainBtn = document.getElementById('mainActionButton');
+
+            if (type === 'couple') {
+                primaryHeader.innerText = "Partner A Parameters";
+                dynamicFields.innerHTML = `
+                    <div class="form-section-header">Partner B Parameters</div>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Partner B Full Name *</label><input type="text" id="partnerBName" required></div>
+                        <div class="form-group"><label>Partner B Birth Date *</label><input type="date" id="partnerBBirthDate" required></div>
+                    </div>`;
+                mainBtn.innerText = "🔒 Initialize Premium Affinity Sanctuary Link";
+                mainBtn.style.background = "#f27474";
+            } else {
+                primaryHeader.innerText = "Your Coordinate Profile";
+                mainBtn.innerText = "🔮 Materialize Matrix Preview";
+                mainBtn.style.background = "var(--accent-gold)";
+                
+                if (type === 'bazi') {
+                    dynamicFields.innerHTML = `
+                        <div class="grid-2">
+                            <div class="form-group"><label>Exact Birth Time Mapping</label><input type="time" id="birthTime" required></div>
+                            <div class="form-group"><label>Geographic City of Birth</label><input type="text" id="birthPlace" required placeholder="City, Country"></div>
+                        </div>`;
+                } else if (type === 'numerology') {
+                    dynamicFields.innerHTML = `<div class="form-group"><label>Birth Certificate Original Name String</label><input type="text" id="identityNameString" required></div>`;
+                } else { dynamicFields.innerHTML = ''; }
+            }
+
+            updateSliderBounds();
+            toggleGatewayRender();
+            document.getElementById('engineContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleRegionSwitch() {
+            selectedGatewayRegion = document.getElementById('regionSelector').value;
+            updateSliderBounds();
+            toggleGatewayRender();
+        }
+
+        function updateSliderBounds() {
+            const slider = document.getElementById('priceSlider');
+            const metrics = dynamicSanctuaryPricing[activeProductCode];
+            if(selectedGatewayRegion === 'sea') {
+                slider.min = metrics.idrMin; slider.max = metrics.idrMin * 4; slider.step = 5000; slider.value = metrics.idrMin;
+            } else {
+                slider.min = metrics.usdMin; slider.max = metrics.usdMin * 4; slider.step = 0.50; slider.value = metrics.usdMin;
+            }
+            syncSliderCalculation();
+        }
+
+        function syncSliderCalculation() {
+            const val = parseFloat(document.getElementById('priceSlider').value);
+            currentUnifiedNumericValue = val;
+            document.getElementById('priceDisplayInput').value = selectedGatewayRegion === 'sea' ? `Rp ${val.toLocaleString('id-ID')}` : `$${val.toFixed(2)} USD`;
+        }
+
+        function toggleGatewayRender() {
+            const paypalContainer = document.getElementById('paypal-button-container');
+            const midtransContainer = document.getElementById('midtrans-container');
+
+            if(selectedGatewayRegion === 'sea') {
+                paypalContainer.style.display = 'none';
+                midtransContainer.style.display = 'block';
+            } else {
+                paypalContainer.style.display = 'block';
+                midtransContainer.style.display = 'none';
+                
+                // Clear any leftover artifacts and inject fresh buttons
+                paypalContainer.innerHTML = ''; 
+                initializePayPalButton();
+            }
+        }
+
+        function initializePayPalButton() {
+            if (typeof paypal !== 'undefined') {
+                paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color:  'gold',
+                        shape:  'pill',
+                        label:  'paypal'
+                    },
+                    createOrder: function(data, actions) { 
+                        return actions.order.create({ 
+                            purchase_units: [{ 
+                                amount: { 
+                                    value: currentUnifiedNumericValue.toFixed(2) 
+                                } 
+                            }] 
+                        }); 
+                    },
+                    onApprove: function(data, actions) { 
+                        return actions.order.capture().then(function(details) { 
+                            triggerPostDonationState(details.id, 'paypal'); 
+                        }); 
+                    },
+                    onError: function(err) {
+                        console.error("PayPal Smart Button failed to render/execute: ", err);
+                    }
+                }).render('#paypal-button-container');
+            } else {
+                console.error("PayPal SDK script has not loaded correctly.");
+            }
+        }
+
+        function processEnginePreview() {
+            const name = document.getElementById('targetName').value;
+            const bDate = document.getElementById('birthDate').value;
+            if(!name || !bDate) { alert("Please supply foundational identity tracking details (*)."); return; }
+
+            const insightBlock = document.getElementById('previewInsight');
+            const teasersBlock = document.getElementById('lockedPreviewTeasers');
+            const previewWindow = document.getElementById('previewFrame');
+            const sessionKey = 'cat_sec_' + Math.random().toString(36).substring(2, 11);
+
+            // Handle Love Match Paid-Only Logic Layer
+            if (activeProductCode === 'couple') {
+                const pBName = document.getElementById('partnerBName').value;
+                const pBDate = document.getElementById('partnerBBirthDate').value;
+                if(!pBName || !pBDate) { alert("Affinity tracking links require two fully loaded coordinate parameters to run."); return; }
+                
+                insightBlock.innerHTML = `<strong>💞 Dual Matrix Intersect Status: Initialized</strong><br><p style='font-size:13px; color:var(--text-secondary); margin-top:4px;'>Friction metrics and romance sync thresholds are locked inside the sanctuary. Extend an altar donation below to evaluate your complete structural synastry report portfolio.</p>`;
+                teasersBlock.innerHTML = '';
+                
+                const cachePackage = { sessionId: sessionKey, clientName: name, birthDate: bDate, productType: activeProductCode, partnerBName: pBName, partnerBBirthDate: pBDate, userQuestion: document.getElementById('userQuestion').value };
+                sessionStorage.setItem('active_sanctuary_cache', JSON.stringify(cachePackage));
+                previewWindow.style.display = 'block';
+                
+                toggleGatewayRender();
+                previewWindow.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // Standard Individual Free Teaser Generation Blocks
+            if(activeProductCode === 'tarot') {
+                insightBlock.innerHTML = `<strong>🔮 Foundational Matrix Snapshot: Present State</strong><p style='font-size:13px; color:var(--text-secondary); margin-top:6px;'>Your present field shows a dense cluster of emotional shifts masking immediate career adjustment directions.</p>`;
+                teasersBlock.innerHTML = `<div class="locked-badge-container"><div class="locked-title">🔒 Sanctuary Shield: Position II & III Analytical Logs</div><p style="font-size:11px; color:var(--text-secondary);">Donation unlocks exact future path alterations, ideal industry codes, and tactical remediation vectors.</p></div>`;
+            } else if (activeProductCode === 'numerology') {
+                insightBlock.innerHTML = `<strong>🔮 Foundational Matrix Snapshot: Core Vibration</strong><p style='font-size:13px; color:var(--text-secondary); margin-top:6px;'>Your structural data string registers a Root Expression score of Index 7, denoting high strategic capabilities.</p>`;
+                teasersBlock.innerHTML = `<div class="locked-badge-container"><div class="locked-title">🔒 Sanctuary Shield: Life Path Matrix & 2026 Timing Blueprints</div><p style="font-size:11px; color:var(--text-secondary);">Donation unlocks high-fit executive industry vectors and calendar tracking pacing alerts for 2026.</p></div>`;
+            } else if (activeProductCode === 'bazi') {
+                insightBlock.innerHTML = `<strong>🔮 Foundational Matrix Snapshot: Daymaster Trace</strong><p style='font-size:13px; color:var(--text-secondary); margin-top:6px;'>Your internal elemental footprint aligns with a Yang Wood Daymaster asset blueprint structure.</p>`;
+                teasersBlock.innerHTML = `<div class="locked-badge-container"><div class="locked-title">🔒 Sanctuary Shield: Complete 4 Pillars Chart & Industry Mapping</div><p style="font-size:11px; color:var(--text-secondary);">Donation unveils the complete Heavenly Stem grid layout, specific luck cycle timestamps, and tailored optimal industry lists.</p></div>`;
+            }
+
+            const cachePackage = {
+                sessionId: sessionKey, clientName: name, birthDate: bDate, productType: activeProductCode,
+                additionalCoordinates: activeProductCode === 'bazi' ? document.getElementById('birthPlace').value : '',
+                timeCoordinate: activeProductCode === 'bazi' ? document.getElementById('birthTime').value : '',
+                identityString: activeProductCode === 'numerology' ? document.getElementById('identityNameString').value : '',
+                userQuestion: document.getElementById('userQuestion').value
+            };
+            sessionStorage.setItem('active_sanctuary_cache', JSON.stringify(cachePackage));
+            previewWindow.style.display = 'block';
+            
+            toggleGatewayRender();
+            previewWindow.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function executeMidtransDonation() {
+            const cache = JSON.parse(sessionStorage.getItem('active_sanctuary_cache'));
+            if(!cache) return;
+            try {
+                const res = await fetch('/api/midtrans-token-initializer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionId: cache.sessionId, product: cache.productType, amount: currentUnifiedNumericValue })
+                });
+                const tokenData = await res.json();
+                if(tokenData.token) {
+                    window.snap.pay(tokenData.token, {
+                        onSuccess: function() { triggerPostDonationState(cache.sessionId, 'midtrans'); }
+                    });
+                }
+            } catch (err) { console.error("Midtrans runtime error:", err); }
+        }
+
+        // SWAP TO POST-DONATION EMAIL MODE
+        function triggerPostDonationState(txId, platform) {
+            const memory = JSON.parse(sessionStorage.getItem('active_sanctuary_cache'));
+            memory.transactionId = txId;
+            memory.gatewayVendorId = platform;
+            memory.amountPaidString = document.getElementById('priceDisplayInput').value;
+            sessionStorage.setItem('active_sanctuary_cache', JSON.stringify(memory));
+
+            // Hide the form components and checkout sliders completely
+            document.getElementById('oracleDataForm').style.display = 'none';
+            document.getElementById('previewFrame').style.display = 'none';
+            
+            // Pop open the clean email collection interface terminal screen
+            const terminal = document.getElementById('emailCaptureTerminal');
+            terminal.style.display = 'block';
+            terminal.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function dispatchFinalReportToPipeline() {
+            const mailValue = document.getElementById('destinationEmail').value;
+            if(!mailValue || !mailValue.includes('@')) { alert("Please specify a genuine destination electronic email address map."); return; }
+
+            const masterPackage = JSON.parse(sessionStorage.getItem('active_sanctuary_cache'));
+            masterPackage.email = mailValue; // Securely append destination routing email target right here
+
+            // Redirect instantly to the thank you screen terminal view
+            window.location.href = `/thank-you.html?session=${masterPackage.sessionId}`;
+
+            // Fire the absolute complete tracking metrics array cleanly to the serverless AI core
+            await fetch('/api/compile-oracle-report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(masterPackage)
+            });
+        }
+    </script>
 </body>
 </html>
