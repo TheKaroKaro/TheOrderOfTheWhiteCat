@@ -12,10 +12,11 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing mandatory request data parameters.' });
     }
 
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    // Direct Google Gemini API Key and Brevo variables safely extracted from Vercel environment variables
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
-    if (!OPENROUTER_API_KEY || !BREVO_API_KEY) {
+    if (!GEMINI_API_KEY || !BREVO_API_KEY) {
         return res.status(500).json({ error: 'Environment master verification keys not found.' });
     }
 
@@ -68,24 +69,32 @@ export default async function handler(req, res) {
     }
 
     try {
-        const openRouterCall = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        // Direct Native Call to Google's official Gemini API Server endpoint
+        const googleGeminiCall = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
-            headers: { 'Authorization': `Bearer ${OPENROUTER_API_KEY}`, 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-    model: 'google/gemini-2.5-flash:free',
-                messages: [
-                    { role: 'system', content: systemIdentityPrompt },
-                    { role: 'user', content: analyticsPrompt }
+                contents: [
+                    { 
+                        role: 'user', 
+                        parts: [{ text: `${systemIdentityPrompt}\n\nTask:\n${analyticsPrompt}` }] 
+                    }
                 ],
-                temperature: 0.0,
-                seed: computedSeed
+                generationConfig: {
+                    temperature: 0.2 // Slightly fluid to preserve mystical elements, keeping values close together
+                }
             })
         });
 
-        const data = await openRouterCall.json();
-        const outputMarkdown = data.choices[0].message.content;
+        const data = await googleGeminiCall.json();
+        
+        // Safely extract text output out of Google's specific nested structural JSON format
+        const outputMarkdown = data.candidates[0].content.parts[0].text;
+        
+        // Structure the markdown to standard, beautiful email HTML format matching theme layouts
         const htmlBody = outputMarkdown.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong style="color:#dfb76c;">$1</strong>');
 
+        // Route directly to your automated Brevo distribution hub infrastructure
         await fetch('https://api.brevo.com/v3/smtp/email', {
             method: 'POST',
             headers: { 'api-key': BREVO_API_KEY, 'Content-Type': 'application/json' },
