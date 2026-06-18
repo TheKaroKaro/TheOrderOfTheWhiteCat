@@ -12,7 +12,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing mandatory request data parameters.' });
     }
 
-    // Direct Google Gemini API Key and Brevo variables safely extracted from Vercel environment variables
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
@@ -20,7 +19,6 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Environment master verification keys not found.' });
     }
 
-    // Generate strict deterministic math seed to lock text outputs per user dataset
     let seedBase = clientName.trim().toLowerCase() + birthDate + productType + (partnerBName || '');
     let computedSeed = 0;
     for (let i = 0; i < seedBase.length; i++) {
@@ -33,7 +31,6 @@ export default async function handler(req, res) {
     let analyticsPrompt = '';
 
     if (productType === 'couple') {
-        // High-end Affinity Love Match Processing Module
         analyticsPrompt = `Perform a comprehensive, elite Relationship Affinity Resonance evaluation mapping the compatibility charts between:
         Partner A: ${clientName} (Born: ${birthDate})
         Partner B: ${partnerBName} (Born: ${partnerBBirthDate})
@@ -56,7 +53,6 @@ export default async function handler(req, res) {
         CRITICAL BUSINESS DIRECTIVE: Map out clear, detailed definitions detailing which modern career tracks, functional corporate industries, and structural fields perfectly align with their numbers.
         Write a minimum of 650 words.`;
     } else {
-        // BaZi Logic Block containing Career/Industry matching directives
         analyticsPrompt = `Execute a comprehensive, professional-grade Four Pillars of Destiny (BaZi) Cosmic Blueprint for ${clientName}. 
         Coordinates: Date: ${birthDate} | Time: ${timeCoordinate || 'Unknown'} | Location: ${additionalCoordinates || 'Unknown'}.
         
@@ -69,32 +65,19 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Direct Native Call to Google's official Gemini API Server endpoint
         const googleGeminiCall = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [
-                    { 
-                        role: 'user', 
-                        parts: [{ text: `${systemIdentityPrompt}\n\nTask:\n${analyticsPrompt}` }] 
-                    }
-                ],
-                generationConfig: {
-                    temperature: 0.2 // Slightly fluid to preserve mystical elements, keeping values close together
-                }
+                contents: [{ role: 'user', parts: [{ text: `${systemIdentityPrompt}\n\nTask:\n${analyticsPrompt}` }] }],
+                generationConfig: { temperature: 0.2 }
             })
         });
 
         const data = await googleGeminiCall.json();
-        
-        // Safely extract text output out of Google's specific nested structural JSON format
         const outputMarkdown = data.candidates[0].content.parts[0].text;
-        
-        // Structure the markdown to standard, beautiful email HTML format matching theme layouts
         const htmlBody = outputMarkdown.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong style="color:#dfb76c;">$1</strong>');
 
-        // Route directly to your automated Brevo distribution hub infrastructure
         await fetch('https://api.brevo.com/v3/smtp/email', {
             method: 'POST',
             headers: { 'api-key': BREVO_API_KEY, 'Content-Type': 'application/json' },
